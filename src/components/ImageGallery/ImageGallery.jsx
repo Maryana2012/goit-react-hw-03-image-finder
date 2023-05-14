@@ -28,7 +28,7 @@ export default class ImageGallery extends Component {
     }
    
     render() {
-        const {gallery,loading,error}=this.state;
+        const {gallery,loading}=this.state;
         const { hits } = gallery;
         return (<div>
              <ul className={css.ImageGallery}>

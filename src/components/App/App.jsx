@@ -1,10 +1,9 @@
 import { Component } from "react";
-import axios from "axios";
-import Button from "components/Button/Button";
+// import Button from "components/Button/Button";
 import Searchbar from "components/Searchbar/Searchbar";
 import ImageGallery from "components/ImageGallery/ImageGallery";
-import Modal from "components/Modal/Modal";
-import { RotatingLines } from "react-loader-spinner";
+// import Modal from "components/Modal/Modal";
+// import { RotatingLines } from "react-loader-spinner";
 
 export default class App extends Component{
   state = {

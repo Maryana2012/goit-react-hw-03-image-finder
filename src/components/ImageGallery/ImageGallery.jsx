@@ -17,7 +17,7 @@ export default class ImageGallery extends Component {
              this.setState({loading: true, valueInput: ''})
             fetch(`https://pixabay.com/api/?q=cat&page=1&key=34725568-3bb6c7550daf8cb631b41e469&image_type=photo&orientation=horizontal&page=${this.state.page}&per_page=12&q=${this.props.valueInput}`)
                 .then(response => { return response.json() })
-                .then(gallery => { this.setState(prev => ({ gallery: [...prev.gallery,...gallery]}))})
+                .then(gallery => {this.setState(prev =>({gallery: [...prev.gallery, ...gallery]}))})
                 .catch(error => this.setState({error}))
                 .finally(()=>{this.setState({loading:false})})
             }
@@ -28,11 +28,8 @@ export default class ImageGallery extends Component {
     }
    
     render() {
-        console.log(this.state);
-        const { gallery, loading, error } = this.state;
-        // console.log(gallery);
+        const {gallery,loading,error}=this.state;
         const { hits } = gallery;
-        // console.log(hits);
         return (<div>
              <ul className={css.ImageGallery}>
               {error && <h1>error.message</h1> }

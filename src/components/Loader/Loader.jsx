@@ -1,4 +1,4 @@
-import { RotatingLines } from 'react-loader-spinner';
+import { RotatingLines } from 'react-loader-spinner'
 <RotatingLines
   strokeColor="grey"
   strokeWidth="5"

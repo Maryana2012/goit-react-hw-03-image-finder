@@ -33,8 +33,8 @@ return ( <header className={css.Searchbar}>
                type="text"
                value={this.state.valueInput}
                onChange={this.handleChange}
-               autoComplete="off"
-               autoFocus
+            //    autocomplete="off"
+            //    autofocus
                placeholder="Search images and photos" />
          </form>
        </header>

@@ -15,9 +15,9 @@ export default class ImageGallery extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.valueInput !== this.props.valueInput || prevState.page!==this.state.page) {
              this.setState({loading: true, valueInput: ''})
-            fetch(`https://pixabay.com/api/?key=34725568-3bb6c7550daf8cb631b41e469&image_type=photo&orientation=horizontal&page=${this.state.page}&per_page=12&q=${this.props.valueInput}`)
+            fetch(`https://pixabay.com/api/?q=cat&page=1&key=34725568-3bb6c7550daf8cb631b41e469&image_type=photo&orientation=horizontal&page=${this.state.page}&per_page=12&q=${this.props.valueInput}`)
                 .then(response => { return response.json() })
-                .then(gallery => { this.setState( prev => ({gallery: prev.gallery,...gallery}))})
+                .then(gallery => { this.setState(prev => ({ gallery: [...prev.gallery,...gallery]}))})
                 .catch(error => this.setState({error}))
                 .finally(()=>{this.setState({loading:false})})
             }
@@ -28,15 +28,18 @@ export default class ImageGallery extends Component {
     }
    
     render() {
-        const {hits,loading}=this.state;
-        // const { hits } = gallery;
+        console.log(this.state);
+        const { gallery, loading, error } = this.state;
         // console.log(gallery);
+        const { hits } = gallery;
+        // console.log(hits);
         return (<div>
              <ul className={css.ImageGallery}>
+              {error && <h1>error.message</h1> }
                 {loading && <RotatingLines />} 
-                {hits && hits.map(hit => <ImageGalleryItem key={hit.id } image={hit.webformatURL} alt={hit.tags} />)}
+                {gallery  && hits.map(hit => <ImageGalleryItem key={hit.id } image={hit.webformatURL} alt={hit.tags} />)}
             </ul>
-            {this.state.hits && <Button onPageSubmit={this.onPageSubmit} gallery={hits} />}
+            {this.state.gallery && <Button onPageSubmit={this.onPageSubmit} gallery={gallery} />}
             
               </div>
        

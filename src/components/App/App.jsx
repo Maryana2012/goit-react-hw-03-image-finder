@@ -17,7 +17,7 @@ export default class App extends Component{
    this.setState({largeImageURL})
  }
   render() {
-    const {valueInput, showModal,modalImage}=this.state
+    const {valueInput}=this.state
     return (<div>
       < Searchbar onSubmitInput={ this.handleInputSubmit} />
       <ImageGallery valueInput={valueInput}

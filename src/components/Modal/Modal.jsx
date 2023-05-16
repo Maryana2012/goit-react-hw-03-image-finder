@@ -1,4 +1,5 @@
 import { Component } from "react";
+import PropTypes from 'prop-types';
 import css from '../Modal/Modal.module.css'
 export default class Modal extends Component{
 
@@ -29,8 +30,9 @@ export default class Modal extends Component{
             <div className={css.Modal} >
                 { children }
             </div>
-        </div>
-    )
+        </div>)
+    }
 }
-    
+Modal.propTypes = {
+    onClick:PropTypes.func
 }

@@ -1,5 +1,5 @@
 import { Component } from 'react';
-// import Notiflix from 'notiflix';
+import PropTypes from 'prop-types';
 import { RotatingLines } from "react-loader-spinner";
 import css from '../ImageGallery/ImageGallery.module.css'
 import ImageGalleryItem from "components/ImageGalleryItem/ImageGalleryItem"
@@ -12,20 +12,11 @@ export default class ImageGallery extends Component {
         loading: false,
         page: 1,
         totalHits: 0,
-        showModal: false,
-        // modalImage: '',
-       
+        showModal: false,      
     }
-    toggleModal = () => {
-        this.setState(({ showModal }) => ({
-            showModal: !showModal
-        }));
-    }
+   
     componentDidMount() {
-       
-        
         const parsedHits = JSON.parse(localStorage.getItem("hits"));
-
         if (parsedHits !== null) {
             this.setState({ hits: parsedHits });
            this.props.openModal(this.largeImageURL);  
@@ -33,8 +24,6 @@ export default class ImageGallery extends Component {
         }
     }
     componentDidUpdate(prevProps, prevState) {
-        // let hitsLocalStorage = [];
-        //  if (this.props.valueInput === '') { localStorage.clear() }
         if (prevProps.valueInput !== this.props.valueInput || prevState.page!==this.state.page) {
              this.setState({loading: true, valueInput: ''})
             fetch(`https://pixabay.com/api/?q=cat&page=1&key=34725568-3bb6c7550daf8cb631b41e469&image_type=photo&orientation=horizontal&page=${this.state.page}&per_page=12&q=${this.props.valueInput}`)
@@ -51,8 +40,9 @@ export default class ImageGallery extends Component {
         }
          
          if (this.state.gallery !== prevState.gallery) {
-           localStorage.setItem('hits', JSON.stringify(this.state.gallery) )}
-    }
+            localStorage.setItem('hits', JSON.stringify(this.state.gallery))
+         }
+    } 
 
     openModal = largeImageURL => {
         this.setState({
@@ -61,6 +51,9 @@ export default class ImageGallery extends Component {
         });
     }
 
+     toggleModal = () => {
+        this.setState(({ showModal }) => ({showModal: !showModal}));
+    }
 
     onPageSubmit = page => {
         this.setState({page})
@@ -71,7 +64,7 @@ export default class ImageGallery extends Component {
             return (<div>
               {error && <h1>error.message</h1> }
               {loading && <RotatingLines />} 
-             <ul className={css.ImageGallery}>
+                <ul className={css.ImageGallery}>
                     {gallery && gallery.map(image => <ImageGalleryItem key={image.id}
                         image={image.webformatURL}
                         alt={image.tags}
@@ -84,10 +77,19 @@ export default class ImageGallery extends Component {
                 <img src={modalImage} alt="largeImage" className={css.Image} />
                 </Modal> )}
                
-           </div>
-       
-            )
-       
-    
+           </div>)
     }
+}
+
+ImageGallery.propTypes = {
+    key: PropTypes.number,
+    alt: PropTypes.string,
+    image: PropTypes.string,
+    largeImageURL: PropTypes.string,
+    openModal: PropTypes.func,
+    onPageSubmit: PropTypes.func,
+    gallery: PropTypes.array,
+    totalHits: PropTypes.number,
+    onClose: PropTypes.func,
+    src: PropTypes.string
 }

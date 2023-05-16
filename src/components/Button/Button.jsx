@@ -16,6 +16,5 @@ export default class Button extends Component {
                  onClick={this.MakeButton}
                  className={css.Button}>
             Load More</button>)
-    }
-    
+    }  
 }

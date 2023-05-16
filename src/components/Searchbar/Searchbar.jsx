@@ -13,7 +13,7 @@ handleChange= e => {
 handleSubmit = e => {
     e.preventDefault();
     if (this.state.valueInput.trim() === ''){
-        Notiflix.Notify.warning('Enter word for search')
+        Notiflix.Notify.info('Enter word for search')
     
     return;
     }

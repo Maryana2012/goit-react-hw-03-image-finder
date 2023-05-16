@@ -67,7 +67,7 @@ export default class ImageGallery extends Component {
     }
    
     render() {
-        const {gallery,loading,error, totalHits,largeImageURL,modalImage, showModal}=this.state;
+        const {gallery,loading,error, totalHits,modalImage, showModal}=this.state;
             return (<div>
               {error && <h1>error.message</h1> }
               {loading && <RotatingLines />} 
@@ -75,7 +75,7 @@ export default class ImageGallery extends Component {
                     {gallery && gallery.map(image => <ImageGalleryItem key={image.id}
                         image={image.webformatURL}
                         alt={image.tags}
-                        largeImageURL={largeImageURL}
+                        largeImageURL={image.largeImageURL}
                         openModal={this.openModal } />)}
             </ul>
                 {this.state.gallery.length !==0  && <Button onPageSubmit={this.onPageSubmit} gallery={gallery} totalHits={totalHits} />}

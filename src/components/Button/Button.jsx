@@ -6,22 +6,16 @@ export default class Button extends Component {
     }
     
     MakeButton = () => {
-        if (this.props.gallery.totalHits-this.state.page * 12 > 12) {
-            this.setState((prevState) => {
-                return{ page: prevState.page + 1}
-            })
-        }
-         this.props.onPageSubmit(this.state.page)
+        if (this.props.totalHits-this.state.page * 12 > 12) {
+            this.setState((prevState) => {return{ page: prevState.page + 1}}) } 
+            this.props.onPageSubmit(this.state.page)
     }
     
     render() {
-       
         return (<button type="button"
-           
-            onClick={this.MakeButton}
-            className={css.Button}>
-            Load More</button>
-    )
+                 onClick={this.MakeButton}
+                 className={css.Button}>
+            Load More</button>)
     }
     
 }

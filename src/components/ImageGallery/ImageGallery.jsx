@@ -7,7 +7,7 @@ import Button from 'components/Button/Button';
 
 export default class ImageGallery extends Component {
     state = {
-        gallery: '',
+        gallery: [],
         loading: false,
         page: 1,
         hitsLocalStorage:[]
@@ -49,10 +49,10 @@ export default class ImageGallery extends Component {
         const {gallery,loading,error}=this.state;
         // const { hits } = gallery;
         return (<div>
-             <ul className={css.ImageGallery}>
               {error && <h1>error.message</h1> }
                 {loading && <RotatingLines />} 
-                {gallery  && gallery.map(hit => <ImageGalleryItem key={hit.id } image={hit.webformatURL} alt={hit.tags} />)}
+             <ul className={css.ImageGallery}>
+                {gallery  && gallery.map(image => <ImageGalleryItem key={image.id } image={image.webformatURL} alt={image.tags} />)}
             </ul>
             {this.state.gallery && <Button onPageSubmit={this.onPageSubmit} gallery={gallery} />}
             

@@ -10,7 +10,7 @@ export default class ImageGallery extends Component {
         gallery: '',
         loading: false,
         page: 1,
-        // hitsLocalStorage:[]
+        hitsLocalStorage:[]
     }
      componentDidMount() {
         const parsedHits = JSON.parse(localStorage.getItem("hits"));
@@ -29,13 +29,15 @@ export default class ImageGallery extends Component {
                 .catch(error => this.setState({error}))
                 .finally(()=>{this.setState({loading:false})})
         }
-          if(this.state.gallery.hits !== prevState.gallery.hits) {
-    
-          localStorage.setItem("hits", JSON.stringify(this.state.gallery.hits));
-        }
+        
+        //   localStorage.setItem("hits", JSON.stringify(this.state.gallery.hits));
+        // }
         // console.log(this.state.gallery.hits);
-        // hitsLocalStorage.push(this.state.gallery.hits)
-        // localStorage.setItem('hits',this.state.hitsLocalStorage)
+        if (this.state.gallery.hits !== prevState.gallery.hits) {
+            // this.setState({ hitsLocalStorage: [...this.state.hitsLocalStorage] })
+            // hitsLocalStorage.push(this.state.gallery.hits)
+            localStorage.setItem('hits', this.state.hitsLocalStorage)
+        }
     }
 
     onPageSubmit = page => {

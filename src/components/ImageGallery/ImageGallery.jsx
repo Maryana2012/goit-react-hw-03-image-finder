@@ -75,7 +75,7 @@ export default class ImageGallery extends Component {
                     {gallery && gallery.map(image => <ImageGalleryItem key={image.id}
                         image={image.webformatURL}
                         alt={image.tags}
-                        largeImageURL={image.largeImageURL}
+                        largeImageURL={largeImageURL}
                         openModal={this.openModal } />)}
             </ul>
                 {this.state.gallery.length !==0  && <Button onPageSubmit={this.onPageSubmit} gallery={gallery} totalHits={totalHits} />}

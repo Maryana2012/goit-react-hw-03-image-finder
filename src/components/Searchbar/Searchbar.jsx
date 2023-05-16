@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import css from '../Searchbar/Searchbar.module.css'
 import Notiflix from 'notiflix';
-
+import PropTypes from 'prop-types';
 export default class Searchbar extends Component{
     state={
       valueInput:''}
@@ -45,5 +45,8 @@ handleSubmit = e => {
             </header>
     )
 }
+}
+Searchbar.propTypes = {
+    onSubmit: PropTypes.func
 }
     

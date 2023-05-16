@@ -25,7 +25,7 @@ export default class ImageGallery extends Component {
              this.setState({loading: true, valueInput: ''})
             fetch(`https://pixabay.com/api/?q=cat&page=1&key=34725568-3bb6c7550daf8cb631b41e469&image_type=photo&orientation=horizontal&page=${this.state.page}&per_page=12&q=${this.props.valueInput}`)
                 .then(response => { return response.json() })
-                .then(gallery => { this.setState({ gallery }) })
+                .then(res => { this.setState(prev=>({gallery: [...prev.gallery,...res.hits]})) })
                 .catch(error => this.setState({error}))
                 .finally(()=>{this.setState({loading:false})})
         }
@@ -33,10 +33,11 @@ export default class ImageGallery extends Component {
         //   localStorage.setItem("hits", JSON.stringify(this.state.gallery.hits));
         // }
         // console.log(this.state.gallery.hits);
-        if (this.state.gallery.hits !== prevState.gallery.hits) {
+        if (this.state.gallery !== prevState.gallery) {
             // this.setState({ hitsLocalStorage: [...this.state.hitsLocalStorage] })
             // hitsLocalStorage.push(this.state.gallery.hits)
-            localStorage.setItem('hits', this.state.hitsLocalStorage)
+            localStorage.setItem('hits', this.state.gallery)
+
         }
     }
 
@@ -46,12 +47,12 @@ export default class ImageGallery extends Component {
    
     render() {
         const {gallery,loading,error}=this.state;
-        const { hits } = gallery;
+        // const { hits } = gallery;
         return (<div>
              <ul className={css.ImageGallery}>
               {error && <h1>error.message</h1> }
                 {loading && <RotatingLines />} 
-                {gallery  && hits.map(hit => <ImageGalleryItem key={hit.id } image={hit.webformatURL} alt={hit.tags} />)}
+                {gallery  && gallery.map(hit => <ImageGalleryItem key={hit.id } image={hit.webformatURL} alt={hit.tags} />)}
             </ul>
             {this.state.gallery && <Button onPageSubmit={this.onPageSubmit} gallery={gallery} />}
             

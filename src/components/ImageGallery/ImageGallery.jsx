@@ -10,7 +10,7 @@ export default class ImageGallery extends Component {
         gallery: [],
         loading: false,
         page: 1,
-        hitsLocalStorage:[]
+        // hitsLocalStorage:[]
     }
      componentDidMount() {
         const parsedHits = JSON.parse(localStorage.getItem("hits"));
@@ -36,7 +36,8 @@ export default class ImageGallery extends Component {
         if (this.state.gallery !== prevState.gallery) {
             // this.setState({ hitsLocalStorage: [...this.state.hitsLocalStorage] })
             // hitsLocalStorage.push(this.state.gallery.hits)
-            localStorage.setItem('hits', this.state.gallery)
+            console.log(this.state.gallery);
+            localStorage.setItem('hits', JSON.stringify(this.state.gallery) )
 
         }
     }

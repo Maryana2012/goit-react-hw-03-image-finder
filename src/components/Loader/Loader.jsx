@@ -1,10 +1,8 @@
 import { RotatingLines } from 'react-loader-spinner'
-import css from '../Loader/Loader.module.css'
 <RotatingLines
-  strokeColor="blue"
+  strokeColor="grey"
   strokeWidth="5"
   animationDuration="0.75"
-  width="76"
+  width="96"
   visible={true}
-  className={css.Loader}
 />

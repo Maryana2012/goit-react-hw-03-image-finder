@@ -1,9 +1,7 @@
 import { Component } from "react";
-import PropTypes from 'prop-types';
 import css from '../Modal/Modal.module.css'
 export default class Modal extends Component{
-
-    componentDidMount() {
+componentDidMount() {
         window.addEventListener('keydown', this.handleKeyDown );
     }
 
@@ -23,16 +21,14 @@ export default class Modal extends Component{
         }
     }
 
+
     render() {
-        const { children } = this.props;
+         const { children } = this.props;
         return (
-          <div className={css.Overlay} onClick={ this.handleBackdpropClick }>
-            <div className={css.Modal} >
-                { children }
+            <div className={css.Overlay} onClick={ this.handleBackdpropClick }>
+                <div className={css.Modal}>{ children}</div>
             </div>
-        </div>)
-    }
+    )
 }
-Modal.propTypes = {
-    onClick:PropTypes.func
+    
 }

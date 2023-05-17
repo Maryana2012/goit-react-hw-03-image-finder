@@ -23,13 +23,15 @@ export default class App extends Component{
     
            if (parsedHits !== null) {
                this.setState({ hits: parsedHits });
-           }
+        }
+        if (this.state.name === "") {
+            this.setState({hits: []})
+        }
        }
     componentDidUpdate (prevProps, prevState) {
            if(this.state.hits !== prevState.hits) {
-       
-             localStorage.setItem("hits", JSON.stringify(this.state.hits));
-           }
+           localStorage.setItem("hits", JSON.stringify(this.state.hits));
+        }
     }
     
     async imageRequest(name, page) {        

@@ -26,7 +26,7 @@ export default class ImageGallery extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.valueInput !== this.props.valueInput || prevState.page!==this.state.page) {
              this.setState({loading: true, valueInput: ''})
-            fetch(`https://pixabay.com/api/?q=cat&page=1&key=34725568-3bb6c7550daf8cb631b41e469&image_type=photo&orientation=horizontal&page=${this.state.page}&per_page=12&q=${this.props.valueInput}`)
+            fetch(`https://pixabay.com/api/?q=${this.props.valueInput}&page=${this.state.page}&key=34725568-3bb6c7550daf8cb631b41e469&image_type=photo&orientation=horizontal&per_page=12&`)
                 .then(response => { return response.json() })
                 .then(res => {
                     this.setState(prev => ({

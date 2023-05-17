@@ -1,4 +1,4 @@
-// import Notiflix from 'notiflix';
+import PropTypes from 'prop-types';
 import css from '../ImageGallery/ImageGallery.module.css'
 import ImageGalleryItem from "components/ImageGalleryItem/ImageGalleryItem"
 
@@ -15,3 +15,7 @@ export default function ImageGallery(props) {
                 onImgClick={onImgClick}/>)}
             </ul>)
 } 
+ImageGallery.propTypes = {
+    articles: PropTypes.array,
+    onImgClick: PropTypes.func,
+}

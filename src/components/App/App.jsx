@@ -5,8 +5,8 @@ import Searchbar from "components/Searchbar/Searchbar";
 import ImageGallery from "components/ImageGallery/ImageGallery";
 import Modal from "components/Modal/Modal";
 import { RotatingLines } from "react-loader-spinner";
-import css from '../App/App.module.css'
 import Notiflix from 'notiflix';
+import css from '../App/App.module.css'
 
 export default class App extends Component{
   state = {
@@ -22,10 +22,8 @@ export default class App extends Component{
         this.setState({ loading: true });
 
         try {
-            const response = await axios(`https://pixabay.com/api/?q=${name}&page=${page}&key=34725568-3bb6c7550daf8cb631b41e469&image_type=photo&orientation=horizontal&per_page=24`);
+            const response = await axios(`https://pixabay.com/api/?q=${name}&page=${page}&key=34725568-3bb6c7550daf8cb631b41e469&image_type=photo&orientation=horizontal&per_page=12`);
 
-            const totalPages = response.data.totalHits / response.data.hits.length;
-           
             if (response.data.hits.length < 1) {
                 this.setState({ loading: false })
                  Notiflix.Notify.info('Enter word for request')
@@ -39,10 +37,9 @@ export default class App extends Component{
                 }
             });
             this.setState({ visibleLoadMore: true });
-            if (response.data.hits.length<24) {
+            if (response.data.hits.length < 12){
                 this.setState({ loading: false, visibleLoadMore: false })
-                // toast.error('Извините, но это были последние изображения.');
-            }
+             }
             return response.data.hits;
         } catch (error) {
             this.setState({ error });

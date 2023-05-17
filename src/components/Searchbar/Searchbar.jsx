@@ -1,6 +1,7 @@
 // const BASE_KEY = '34725568-3bb6c7550daf8cb631b41e469';
 // const BASE_URL = 'https://pixabay.com/api/?q=cat&page=1&key=your_key&image_type=photo&orientation=horizontal&per_page=12';
 import { Component } from 'react'
+import PropTypes from 'prop-types';
 import css from '../Searchbar/Searchbar.module.css'
 
 
@@ -53,5 +54,8 @@ render (){
             </header>
     )
 }
+}
+Searchbar.propTypes = {
+    onSubmitHandler: PropTypes.func.isRequired,
 }
     

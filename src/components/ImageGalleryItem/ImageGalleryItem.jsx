@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import css from '../ImageGalleryItem/ImageGalleryItem.module.css'
 export default function ImageGalleryItem({ image, tags, largeImage,onImgClick }) {
     
@@ -8,4 +9,10 @@ export default function ImageGalleryItem({ image, tags, largeImage,onImgClick })
                  onClick={() => onImgClick(largeImage)} />
         </li>
     )
+}
+ImageGalleryItem.propTypes = {
+    image: PropTypes.string,
+    largeImage: PropTypes.string,
+    tags: PropTypes.string,
+    onModal: PropTypes.func,
 }

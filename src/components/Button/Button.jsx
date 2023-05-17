@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import css from '../Button/Button.module.css' 
 
 export default function Button ({onButtonClick}){
@@ -6,4 +7,7 @@ export default function Button ({onButtonClick}){
             className={css.Button}>
             Load More</button>
         )
+}
+Button.propTypes = {
+    onButtonClick: PropTypes.func,
 }

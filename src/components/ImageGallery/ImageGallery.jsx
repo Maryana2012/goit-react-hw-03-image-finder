@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import Notiflix from 'notiflix';
 import { RotatingLines } from "react-loader-spinner";
 import css from '../ImageGallery/ImageGallery.module.css'
 import ImageGalleryItem from "components/ImageGalleryItem/ImageGalleryItem"
@@ -20,8 +21,8 @@ export default class ImageGallery extends Component {
         if (parsedHits !== null) {
             this.setState({ hits: parsedHits });
            this.props.openModal(this.largeImageURL);  
-            
         }
+        
     }
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.valueInput !== this.props.valueInput || prevState.page!==this.state.page) {
@@ -40,8 +41,12 @@ export default class ImageGallery extends Component {
         }
          
          if (this.state.gallery !== prevState.gallery) {
-            localStorage.setItem('hits', JSON.stringify(this.state.gallery))
-         }
+             localStorage.setItem('hits', JSON.stringify(this.state.gallery))
+             
+        if (this.state.gallery !== prevState.gallery && this.state.gallery.length === 0) {
+              Notiflix.Notify.info('There are no images for your request')
+        }
+        }
     } 
 
     openModal = largeImageURL => {
@@ -71,7 +76,7 @@ export default class ImageGallery extends Component {
                         largeImageURL={image.largeImageURL}
                         openModal={this.openModal } />)}
             </ul>
-                {this.state.gallery.length !==0  && <Button onPageSubmit={this.onPageSubmit} gallery={gallery} totalHits={totalHits} />}
+                {this.state.gallery.length !== 0 && <Button onPageSubmit={this.onPageSubmit} gallery={gallery} totalHits={totalHits} />}
                 {showModal && (
                 <Modal onClose={ this.toggleModal }>
                 <img src={modalImage} alt="largeImage" className={css.Image} />
